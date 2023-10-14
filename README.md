@@ -15,7 +15,7 @@ Each task is linked in the below ways:
 
 * Create all unittests to validate all our classes and storage engine.
 
-**Files**
+<U> **Files** </U>
 
 **models** directory will contain all classes used for the entire project. A class, called “model” in a OOP project is the representation of an object/instance.
 tests directory will contain all unit tests.
