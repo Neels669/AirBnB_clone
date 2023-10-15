@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Unittest for BaseModel class"""
 import unittest
+import uuid
 from models.base_model import BaseModel
 from datetime import datetime
 
@@ -12,8 +13,8 @@ class testbase(unittest.TestCase):
         b1 = BaseModel()
         b2 = BaseModel()
         self.assertNotEqual(b1.id, b2.id)
-        b1.name = "Mariem"
-        self.assertEqual(b1.name, "Mariem")
+        b1.name = "Nilz"
+        self.assertEqual(b1.name, "Nilz")
         self.assertTrue(isinstance(b1.created_at, datetime))
         self.assertTrue(isinstance(b2.updated_at, datetime))
         self.assertTrue(type(b1.id) is str)
