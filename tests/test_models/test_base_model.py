@@ -39,6 +39,20 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn('name', model_dict)
         self.assertIn('my_number', model_dict)
 
+    def test_recreate_from_dict(self):
+        """Check recreate from dict func"""
+        my_model = BaseModel()
+        my_model.name = "Neelam"
+        my_model.my_number = 89
+        model_dict = my_model.to_dict()
+
+        my_new_model = BaseModel(**model_dict)
+        self.assertEqual(my_model.id, my_new_model.id)
+        self.assertEqual(my_model.created_at, my_new_model.created_at)
+        self.assertEqual(my_model.updated_at, my_new_model.updated_at)
+        self.assertEqual(my_model.name, my_new_model.name)
+        self.assertEqual(my_model.my_number, my_new_model.my_number)
+
 
 if __name__ == '__main__':
     unittest.main()
