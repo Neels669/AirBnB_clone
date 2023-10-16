@@ -2,7 +2,7 @@
 """This module is the base class of all our models."""
 import uuid
 from datetime import datetime
-from models import storage
+import models
 
 
 class BaseModel:
@@ -27,7 +27,7 @@ class BaseModel:
                 else:
                     setattr(self, k, v)
         else:
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """Print object"""
@@ -38,7 +38,8 @@ class BaseModel:
         """updates the public instance attribute
         with the current datetime"""
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.new(self)
+        models.storage.save()
 
     def to_dict(self):
         """"returns a dictionary containing all keys/values of instance"""

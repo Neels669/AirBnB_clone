@@ -4,11 +4,12 @@ import cmd
 import sys
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
     """This class defines the cmd"""
-    classes = ["BaseModel"]
+    classes = ["BaseModel", "User"]
 
     prompt = "(hbnb) "
 
@@ -146,6 +147,99 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Handle an empty line (ENTER key) without executing any action"""
         pass
+
+    def do_create_user(self, arg):
+        """Creates a new instance of User"""
+        if arg == '':
+            print("** class name missing **")
+        else:
+            args = arg.split()
+            if args[0] not in HBNBCommand.classes:
+                print("** class doesn't exist **")
+            else:
+                new_user = User()
+                new_user.save()
+                print(new_user.id)
+
+    def do_show_user(self, arg):
+        """Shows an instance of User"""
+        if arg == '':
+            print("** class name missing **")
+        else:
+            args = arg.split()
+            if args[0] not in HBNBCommand.classes:
+                print("** class doesn't exist **")
+            else:
+                if len(args) == 1:
+                    print("** instance id missing **")
+                else:
+                    user_id = args[1]
+                    key = "User." + user_id
+                    objects = storage.all()
+                    if key in objects:
+                        print(objects[key])
+                    else:
+                        print("** no instance found **")
+
+    def do_destroy_user(self, arg):
+        """Destroys an instance of User"""
+        if arg == '':
+            print("** class name missing **")
+        else:
+            args = arg.split()
+            if args[0] not in HBNBCommand.classes:
+                print("** class doesn't exist **")
+            else:
+                if len(args) == 1:
+                    print("** instance id missing **")
+                else:
+                    user_id = args[1]
+                    key = "User." + user_id
+                    objects = storage.all()
+                    if key in objects:
+                        del objects[key]
+                        storage.save()
+                    else:
+                        print("** no instance found **")
+
+    def do_all_user(self, arg):
+        """Lists all User instances"""
+        if arg == '':
+            objects = storage.all()
+            user_instances = [str(obj) for key,
+                              obj in objects.items() if "User." in key]
+            print(user_instances)
+        else:
+            print("** class doesn't exist **")
+
+    def do_update_user(self, arg):
+        """Updates an instance of User"""
+        if arg == '':
+            print("** class name missing **")
+        else:
+            args = arg.split()
+            if args[0] not in HBNBCommand.classes:
+                print("** class doesn't exist **")
+            else:
+                if len(args) == 1:
+                    print("** instance id missing **")
+                else:
+                    user_id = args[1]
+                    key = "User." + user_id
+                    objects = storage.all()
+                    if key not in objects:
+                        print("** no instance found **")
+                    else:
+                        if len(args) == 2:
+                            print("** attribute name missing **")
+                        elif len(args) == 3:
+                            print("** value missing **")
+                        else:
+                            attribute_name = args[2]
+                            attribute_value = args[3]
+                            setattr(objects[key],
+                                    attribute_name, attribute_value)
+                            objects[key].save()
 
 
 if __name__ == '__main__':
