@@ -10,3 +10,7 @@ class testfile(unittest.TestCase):
     def test_inheritance(self):
         """ checks if it inherits from BaseModel """
         self.assertTrue(issubclass(Amenity, BaseModel))
+
+
+if __name__ == '__main__':
+    unittest.main()
