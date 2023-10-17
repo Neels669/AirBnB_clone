@@ -9,7 +9,10 @@ class testfile(unittest.TestCase):
     """ unittests for Review class """
     def test_inheritance(self):
         """ checks if it inherits from BaseModel """
-        self.assertTrue(issubclass(Review, BaseModel))
+        review = Review()
+        self.assertEqual(review.place_id, "")
+        self.assertEqual(review.user_id, "")
+        self.assertEqual(review.text, "")
 
 
 if __name__ == '__main__':

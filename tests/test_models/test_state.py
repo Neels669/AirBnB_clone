@@ -9,7 +9,8 @@ class testfile(unittest.TestCase):
     """ unittests for State class """
     def test_inheritance(self):
         """ checks if it inherits from BaseModel """
-        self.assertTrue(issubclass(State, BaseModel))
+        state = State()
+        self.assertEqual(state.name, "")
 
 
 if __name__ == '__main__':
