@@ -7,9 +7,9 @@ from models.base_model import BaseModel
 
 class testfile(unittest.TestCase):
     """ unittests for Amenity class """
-    def test_inheritance(self):
-        """ checks if it inherits from BaseModel """
-        self.assertTrue(issubclass(Amenity, BaseModel))
+    def test_attributes(self):
+        amenity = Amenity()
+        self.assertEqual(amenity.name, "")
 
 
 if __name__ == '__main__':
